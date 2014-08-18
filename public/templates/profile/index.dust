@@ -1,0 +1,130 @@
+{>"layouts/master" /}
+
+{<title}
+	Profile - College to Career Program  - ScholarMatch
+{/title}
+
+
+{<body}
+	{#data}
+	<div class="container"  data-data2="{data|js}">
+
+		 <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Welcome, {userDetails.login} (<em>{userDetails.role}</em>)</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                <div class="col-md-9 col-lg-9">
+                	{?data.firstlogin}
+						<p class="bg-success">
+							Welcome to Scholarmatch. Please complete your profile.
+						</p>
+					{/data.firstlogin}
+					
+					<form id="signup-form" method="POST" class="form-horizontal">		   		   
+		
+					   <div class="form-group">
+					      <label for="fullName" class="col-sm-3 control-label">Full Name</label>
+					      <div class="col-sm-7"><input type="text" name="fullName" id="fullName" placeholder="Full Name" autofocus="" value="{userDetails.fullName}" class="form-control" ></div>
+					   </div>
+					   <div class="form-group">
+					      <label for="mobilePhone" class="col-sm-3 control-label">Mobile Phone Number</label>
+					      <div class="col-sm-7"><input type="tel" name="mobilePhone" id="mobilePhone" placeholder="Mobile Phone Number" autofocus="" value="{userDetails.mobilePhone}" class="form-control"></div>
+					   </div>
+					   <div class="form-group">
+					      <label for="homePhone" class="col-sm-3 control-label">Home Phone Number</label>
+					      <div class="col-sm-7"><input type="tel" name="homePhone" id="homePhone" placeholder="Home Phone Number" autofocus="" value="{userDetails.homePhone}" class="form-control"></div>
+					   </div>
+					   <div class="form-group">
+					      <label for="otherPhone" class="col-sm-3 control-label">Other Phone Number</label>
+					      <div class="col-sm-7"><input type="tel" name="otherPhone" id="otherPhone" placeholder="Other Phone Number" autofocus="" value="{userDetails.otherPhone}" class="form-control"></div>
+					   </div>
+					   <div class="form-group">
+					      <label for="city" class="col-sm-3 control-label">City</label>
+					      <div class="col-sm-7"><input type="text" name="city" id="city" placeholder="City" value="{userDetails.city}" autofocus="" class="form-control"></div>
+					   </div>		   
+					   <div class="form-group">
+					      <label for="state" class="col-sm-3 control-label">State</label>
+					      <div class="col-sm-7"><input type="text" name="state" id="state" placeholder="state" value="{userDetails.state}" autofocus="" class="form-control"></div>
+					   </div>		   
+					   <div class="form-group">
+					      <label for="college" class="col-sm-3 control-label">College / University</label>
+					      <div class="col-sm-7"><input type="text" name="college" id="college" placeholder="College / university" value="{userDetails.college}" autofocus="" class="form-control"></div>
+					   </div>
+					   <div class="form-group">
+					      <label for="industry" class="col-sm-3 control-label">Industry</label>
+					      <div class="col-sm-7"><input type="text" name="industry" id="industry" placeholder="Industry" autofocus="" value="{userDetails.industry}" class="form-control"></div>		       
+					   </div>
+					   <div class="form-group">
+					      <label for="experience" class="col-sm-3 control-label">Years of Experience</label>
+					      <div class="col-sm-7"><input type="text" name="experience" id="experience" placeholder="Years of Experience" autofocus="" value="{userDetails.experience}" class="form-control"></div>
+					   </div>
+					    <div class="form-group">
+					    	<label for="company" class="col-sm-3 control-label">Company</label>
+					    	<div class="col-sm-7"><input type="text" name="company" id="company" placeholder="Company" autofocus="" value="{userDetails.company}" class="form-control"></div>
+					   	</div>
+					   <div class="form-group">
+					      <label for="gender" class="col-sm-3 control-label">Gender</label>
+					      <div class="col-sm-7"><input type="text" name="gender" id="gender" placeholder="Gender" autofocus="" value="{userDetails.gender}" class="form-control"></div>
+					   </div> 
+					   	<div class="form-group">
+					      	<label for="meetingPreferences" class="col-sm-3 control-label">Meeting Preferences</label>
+					        <div class="col-sm-7">
+					        	<label class="checkbox-inline">
+  									<input type="checkbox" id="phone" value="{userDetails.meetingPreferences.phone}"> Phone
+								</label>
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="inPerson" value="true"> In Person
+								</label>
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="videoChat" value="true"> Video Chat 
+								</label>
+					   		</div>
+					   	</div>
+					   	<div class="form-group">
+					      	<label for="preferredMeetingDays" class="col-sm-3 control-label">Preferred Meeting Days</label>
+					        <div class="col-sm-7">
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="sunday" value="Sunday"> Sun
+								</label>
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="monday" value="Monday"> Mon
+								</label>
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="tuesday" value="Tuesday"> Tue
+								</label>
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="wednesday" value="Wednesday"> Wed
+								</label>
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="Thursday" value="Thursday"> Thu
+								</label>
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="Friday" value="Friday"> Fri
+								</label>					   		
+								<label class="checkbox-inline">
+  									<input type="checkbox" id="Saturday" value="Saturday"> Sat
+								</label>								
+					   		</div>
+					   	</div>					   	
+					   <div class="form-group">
+					      <label for="linkedin" class="col-sm-3 control-label">Linkedin Profile Url</label>
+					      <div class="col-sm-7"><input type="text" name="linkedin" id="city" placeholder="City" value="{userDetails.linkedin}" autofocus="" class="form-control"></div>
+					   </div>
+					   <div class="form-group">
+					      <div class="col-sm-4"><button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Update my profile</button></div>
+					   </div>
+					   
+					   	<input type="hidden" name="_csrf" value="{_csrf}" />
+						<input type="hidden" name="type" id="type" value="0" />
+						<input type="hidden" name="userid" id="userid" value="{userdetails.userid}" />
+					</form>	                	
+                </div>
+              </div>  
+
+
+	</div>
+	{/data}
+{/body}
