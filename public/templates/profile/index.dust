@@ -73,13 +73,13 @@
 					      	<label for="meetingPreferences" class="col-sm-3 control-label">Meeting Preferences</label>
 					        <div class="col-sm-7">
 					        	<label class="checkbox-inline">
-  									<input type="checkbox" id="phone" value="{userDetails.meetingPreferences.phone}"> Phone
+  									<input type="checkbox" id="phone" name="phone" {?userDetails.meetingPreferences.phone}checked{/userDetails.meetingPreferences.phone}/> Phone
 								</label>
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="inPerson" value="true"> In Person
+  									<input type="checkbox" id="inPerson" name="inPerson" {?userDetails.meetingPreferences.inPerson}checked {/userDetails.meetingPreferences.inPerson}/> In Person
 								</label>
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="videoChat" value="true"> Video Chat 
+  									<input type="checkbox" id="videoChat" name="videoChat" {?userDetails.meetingPreferences.videoChat}checked{/userDetails.meetingPreferences.videoChat}/> Video Chat
 								</label>
 					   		</div>
 					   	</div>
@@ -119,7 +119,7 @@
 					   
 					   	<input type="hidden" name="_csrf" value="{_csrf}" />
 						<input type="hidden" name="type" id="type" value="0" />
-						<input type="hidden" name="userid" id="userid" value="{userdetails.userid}" />
+						<input type="hidden" name="userid" id="userid" value="{userDetails.userid}" />
 					</form>	                	
                 </div>
               </div>  

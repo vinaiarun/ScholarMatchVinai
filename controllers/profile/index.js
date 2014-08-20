@@ -1,7 +1,7 @@
 'use strict';
 
 
-var ProfileModel = require('../../models/profile');
+var userModel = require('../../models/user');
 var userLib = require('../../lib/user')();
 
 var logger = require('tracer').colorConsole();
@@ -9,45 +9,56 @@ var logger = require('tracer').colorConsole();
 module.exports = function (router) {
 
     
-	var model = new ProfileModel();
+	var model = new userModel();
    
 	router.get('/', function(req, res) {
         
-        logger.trace("i am here");
+        logger.trace("i am here111");
         model.data = model.data || {};
 
         model.messages = ''; // clear any messages
         
-        model.data.userDetails = model.data.userDetails || {}
-        model.data.userDetails.login = req.user.login;
-        model.data.userDetails.fullName = req.user.fullName;
-        model.data.userDetails.role = req.user.role;
-        model.data.userDetails.mobilePhone = req.user.mobilePhone;
-        model.data.userDetails.homePhone = req.user.homePhone;
-        model.data.userDetails.otherPhone = req.user.otherPhone;
-        model.data.userDetails.college = req.user.college;
-        model.data.userDetails.industry = req.user.industry;
-        model.data.userDetails.experience = req.user.experience;
-        model.data.userDetails.company = req.user.company;
-        model.data.userDetails.gender = req.user.gender;
-        //model.data.userDetails.meetingPreferences.phone = req.user.phone;
-        //model.data.userDetails.meetingPreferences.inPerson = req.user.inPerson;
-        //model.data.userDetails.meetingPreferences.videoChat = req.user.videoChat;
-        logger.trace("i am here");
-        console.log(req.user.city);
-        logger.trace("i am here");
-        model.data.userDetails.city = req.user.city;
-        model.data.userDetails.state = req.user.state;
-        logger.trace("i am here");
-        model.data.userDetails.linkedin = req.user.linkedin;
+        model.data.userDetails = model.data.userDetails || {};
+        model.data.userDetails.meetingPreferences = model.data.userDetails.meetingPreferences || {};
+        
+        model.data.userDetails.userid = req.user._id;
+        logger.trace("i am here222");
+        userLib.findUser(model.data.userDetails, function(err, result){
+            logger.trace("i am here444, userid: " +  req.user._id);
 
-        model.data.userDetails.userid = req.session.userid = req.user._id
+            if(err){
+                logger.trace("i am here 555, userid: " + req.user._id);
+                res.render('profile/index', model);
+            } else {
+                logger.trace("i am here 666, userid: " + req.user._id + " result " + result);
 
-        model.data.firstlogin = req.session.firstlogin;
+                model.data.userDetails.userid = req.user._id;
+                model.data.userDetails.login = req.user.login;
+                model.data.userDetails.fullName = result.fullName;
+                model.data.userDetails.role = result.role;
+                model.data.userDetails.mobilePhone = result.mobilePhone;
+                model.data.userDetails.homePhone = result.homePhone;
+                model.data.userDetails.otherPhone = result.otherPhone;
+                model.data.userDetails.city = result.city;
+                model.data.userDetails.state = result.state;
+                model.data.userDetails.college = result.college;
+                model.data.userDetails.industry = result.industry;
+                model.data.userDetails.experience = result.experience;
+                model.data.userDetails.company = result.company;
+                model.data.userDetails.gender = result.gender;
+                model.data.userDetails.meetingPreferences.phone = result.meetingPreferences.phone;
+                model.data.userDetails.meetingPreferences.inPerson = result.meetingPreferences.inPerson;
+                model.data.userDetails.meetingPreferences.videoChat = result.meetingPreferences.videoChat;
 
-        req.session.firstlogin = false; // clear initial login flag
+                model.data.firstlogin = req.session.firstlogin;
+                req.session.firstlogin = false; // clear initial login flag
+                model.messages = ''; // clear any messages
 
-        res.render('profile/index', model);
+                model.data.userDetails.userid = req.session.userid = req.user._id
+
+                res.render('profile/index', model);
+            }
+        });
     });
 
 
@@ -55,9 +66,15 @@ module.exports = function (router) {
         
         if(req.session.userid){
 
-        	model.data = model.data || {};        
-	        model.data.userDetails = model.data.userDetails || {}
+            logger.trace("i am here in update.......");
+
+        	model.data = model.data || {};
+        	logger.trace("i am here in update model.data ......." + model.data);
+
+	        model.data.userDetails = model.data.userDetails || {};
+            model.data.userDetails.meetingPreferences = model.data.userDetails.meetingPreferences || {};
 	        
+	        model.data.userDetails.userid = req.body.userid;
 	        model.data.userDetails.fullName = req.body.fullName;
 	        model.data.userDetails.mobilePhone = req.body.mobilePhone;
             model.data.userDetails.homePhone = req.body.homePhone;
@@ -66,31 +83,27 @@ module.exports = function (router) {
 	        model.data.userDetails.industry = req.body.industry;
 	        model.data.userDetails.experience = req.body.experience;
             model.data.userDetails.company = req.body.company;
-	        model.data.userDetails.gender = req.body.gender;
-            model.data.userDetails.meetingPreferences.phone = req.user.phone;
-            model.data.userDetails.meetingPreferences.inPerson = req.user.inPerson;
-            model.data.userDetails.meetingPreferences.vidoChat = req.user.vidoChat;
+            model.data.userDetails.gender = req.body.gender;
+            model.data.userDetails.meetingPreferences.phone = req.body.phone;
+            model.data.userDetails.meetingPreferences.inPerson = req.body.inPerson;
+            model.data.userDetails.meetingPreferences.videoChat = req.body.videoChat;
 	        model.data.userDetails.city = req.body.city;
-            model.data.userDetails.state = req.body.state;
+            //model.data.userDetails.state = req.body.state;
             model.data.userDetails.linkedin = req.body.linkedin;
-
-	        // console.dir(model.data.userDetails);
 
 	        userLib.updateUser(model.data.userDetails , function (err, result) {
 	        	
 	        	if(err){
 	        		model.messages = err;	
-	        		// model.messages.status = 'error';	 - Need to add this later
 	        		res.render('profile/index', model);
 	        	}else{
-	        		// console.log('result '  + result);
-	        		// model.messages.status = 'success';
 	        		model.messages = 'Profile Updated';        		
 	        		res.render('profile/index', model);	        		
 	        	}
 
 	        });
         }else{
+            logger.trace("i am here in update.......");
         	res.redirect('/login');
         }
 		
@@ -98,8 +111,6 @@ module.exports = function (router) {
 
 
     router.get('/:name', function (req, res) {
-        
-        res.render('profile/student', model);
-        
+           res.render('profile/student', model);
     });
 };

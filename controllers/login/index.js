@@ -4,6 +4,8 @@
 var LoginModel = require('../../models/login'),
  passport = require('passport');
 
+var logger = require('tracer').colorConsole();
+
 
 module.exports = function (router) {
 
@@ -28,6 +30,8 @@ module.exports = function (router) {
      * Failed authentications will go back to the login page with a helpful error message to be displayed.
      */
     router.post('/', function (req, res) {
+
+        logger.trace("i am here....");
 
         passport.authenticate('local', {
             successRedirect: req.session.goingTo || '/profile',
