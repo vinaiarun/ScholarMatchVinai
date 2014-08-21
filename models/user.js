@@ -11,20 +11,28 @@ var mongoose = require('mongoose'),
 var userModel = function () {
 
         var userSchema = mongoose.Schema({
-            login: { type: String,  required: true,  unique: true },  //Ensure logins are unique.
-            email: { type: String,  required: true,  unique: true },  //Ensure emails are unique.
+            login: { 
+                type: String,  
+                required: true,  
+                unique: true },  //Ensure logins are unique.
+            emailId: { 
+                type: String,  
+                required: true,  
+                unique: true },  //Ensure emails are unique.
             // email: { type: String },  //Ensure emails are unique.
-            password: { type: String, required: true, hide: true }, //We'll store bCrypt hashed passwords.  Just say no to plaintext!
+            password: { type: String,
+                required: true, 
+                hide: true }, //We'll store bCrypt hashed passwords.  Just say no to plaintext!
             fullName: String,            
             role: String,   
-            mobilePhone: String,    
-            homePhone: String,    
-            otherPhone: String,    
+            primaryPhone: String,
+            alternativePhone: String,
             college: String,
             industry: String,
             experience: Number, 
-            company: String,
             gender: String,
+            city: String,
+            state: String,
             meetingPreferences: {
                 phone: Boolean,
                 inPerson: Boolean,
@@ -39,17 +47,24 @@ var userModel = function () {
                 friday: Boolean,
                 saturday: Boolean
             },
-            city: String,
-            state: String,
-            creationDate: { type: Date},
-            resetPasswordToken: String,
-            resetPasswordExpires: Date,
-            lastLoginDate:{ type: Date},
-            lastModifiedDate:{ type: Date, default: Date.now },
-            coachLinked: Array,
-            studentsLinked: Array,
             linkedin: {},
-            search: [String]
+            linkedinUrl: String,
+            coachesLinked: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            }],
+            studentsLinked: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            }],
+            creationDate: Date,
+            resetPasswordToke: String,
+            resetPasswordExpires: Date,
+            lastLoginDate: Date,
+            lastModifiedDate: {
+                type: Date,
+                default: Date.now()
+            },
         });
 
         // plugin architecture

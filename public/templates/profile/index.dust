@@ -29,18 +29,34 @@
 					      <label for="fullName" class="col-sm-3 control-label">Full Name</label>
 					      <div class="col-sm-7"><input type="text" name="fullName" id="fullName" placeholder="Full Name" autofocus="" value="{userDetails.fullName}" class="form-control" ></div>
 					   </div>
+{!
+
+					   	{@eq data.firstLogin="true"}
+					   		<div class="form-group">
+					      		<label for="emailId" class="col-sm-3 control-label">Email Id</label>
+					      		<div class="col-sm-7"><input type="text" name="emailId" id="emailId" placeholder="Email Id" autofocus="" value="{userDetails.login}" class="form-control" ></div>
+					   		</div>
+					   	{:else}
+					   		<div class="form-group">
+					      		<label for="emailId" class="col-sm-3 control-label">Email Id</label>
+					      		<div class="col-sm-7"><input type="text" name="emailId" id="emailId" placeholder="Email Id" autofocus="" value="{userDetails.emailId}" class="form-control" ></div>
+					   		</div>
+					   	{/eq}
+!}
+				   		<div class="form-group">
+				      		<label for="emailId" class="col-sm-3 control-label">Email Id</label>
+				      		<div class="col-sm-7"><input type="text" name="emailId" id="emailId" placeholder="Email Id" autofocus="" value="{userDetails.emailId}" class="form-control" ></div>
+				   		</div>
+
 					   <div class="form-group">
-					      <label for="mobilePhone" class="col-sm-3 control-label">Mobile Phone Number</label>
-					      <div class="col-sm-7"><input type="tel" name="mobilePhone" id="mobilePhone" placeholder="Mobile Phone Number" autofocus="" value="{userDetails.mobilePhone}" class="form-control"></div>
+					      <label for="primaryPhone" class="col-sm-3 control-label">Primary Phone Number</label>
+					      <div class="col-sm-7"><input type="tel" name="primaryPhone" id="primaryPhone" placeholder="Primary Phone Number" autofocus="" value="{userDetails.primaryPhone}" class="form-control"></div>
 					   </div>
 					   <div class="form-group">
-					      <label for="homePhone" class="col-sm-3 control-label">Home Phone Number</label>
-					      <div class="col-sm-7"><input type="tel" name="homePhone" id="homePhone" placeholder="Home Phone Number" autofocus="" value="{userDetails.homePhone}" class="form-control"></div>
+					      <label for="alternativePhone" class="col-sm-3 control-label">Alternative Phone Number</label>
+					      <div class="col-sm-7"><input type="tel" name="alternativePhone" id="alternativePhone" placeholder="Alternative Phone Number" autofocus="" value="{userDetails.alternativePhone}" class="form-control"></div>
 					   </div>
-					   <div class="form-group">
-					      <label for="otherPhone" class="col-sm-3 control-label">Other Phone Number</label>
-					      <div class="col-sm-7"><input type="tel" name="otherPhone" id="otherPhone" placeholder="Other Phone Number" autofocus="" value="{userDetails.otherPhone}" class="form-control"></div>
-					   </div>
+
 					   <div class="form-group">
 					      <label for="city" class="col-sm-3 control-label">City</label>
 					      <div class="col-sm-7"><input type="text" name="city" id="city" placeholder="City" value="{userDetails.city}" autofocus="" class="form-control"></div>
@@ -61,14 +77,11 @@
 					      <label for="experience" class="col-sm-3 control-label">Years of Experience</label>
 					      <div class="col-sm-7"><input type="text" name="experience" id="experience" placeholder="Years of Experience" autofocus="" value="{userDetails.experience}" class="form-control"></div>
 					   </div>
-					    <div class="form-group">
-					    	<label for="company" class="col-sm-3 control-label">Company</label>
-					    	<div class="col-sm-7"><input type="text" name="company" id="company" placeholder="Company" autofocus="" value="{userDetails.company}" class="form-control"></div>
-					   	</div>
 					   <div class="form-group">
 					      <label for="gender" class="col-sm-3 control-label">Gender</label>
 					      <div class="col-sm-7"><input type="text" name="gender" id="gender" placeholder="Gender" autofocus="" value="{userDetails.gender}" class="form-control"></div>
 					   </div> 
+
 					   	<div class="form-group">
 					      	<label for="meetingPreferences" class="col-sm-3 control-label">Meeting Preferences</label>
 					        <div class="col-sm-7">
@@ -87,31 +100,31 @@
 					      	<label for="preferredMeetingDays" class="col-sm-3 control-label">Preferred Meeting Days</label>
 					        <div class="col-sm-7">
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="sunday" value="Sunday"> Sun
+  									<input type="checkbox" id="sunday" name="sunday" {?userDetails.preferredMeetingDays.sunday}checked{/userDetails.preferredMeetingDays.sunday}> Sun
 								</label>
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="monday" value="Monday"> Mon
+  									<input type="checkbox" id="monday" name="monday" {?userDetails.preferredMeetingDays.monday}checked{/userDetails.preferredMeetingDays.monday}> Mon
 								</label>
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="tuesday" value="Tuesday"> Tue
+  									<input type="checkbox" id="tuesday" name="tuesday" {?userDetails.preferredMeetingDays.tuesday}checked{/userDetails.preferredMeetingDays.tuesday}> Tue
 								</label>
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="wednesday" value="Wednesday"> Wed
+  									<input type="checkbox" id="wednesday" name="wednesday" {?userDetails.preferredMeetingDays.wednesday}checked{/userDetails.preferredMeetingDays.wednesday}> Wed
 								</label>
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="Thursday" value="Thursday"> Thu
+  									<input type="checkbox" id="Thursday" name="thursday" {?userDetails.preferredMeetingDays.thursday}checked{/userDetails.preferredMeetingDays.thursday}> Thu
 								</label>
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="Friday" value="Friday"> Fri
+  									<input type="checkbox" id="Friday" name="friday" {?userDetails.preferredMeetingDays.friday}checked{/userDetails.preferredMeetingDays.friday}> Fri
 								</label>					   		
 								<label class="checkbox-inline">
-  									<input type="checkbox" id="Saturday" value="Saturday"> Sat
+  									<input type="checkbox" id="Saturday" name="saturday" {?userDetails.preferredMeetingDays.saturday}checked{/userDetails.preferredMeetingDays.saturday}> Sat
 								</label>								
 					   		</div>
 					   	</div>					   	
 					   <div class="form-group">
-					      <label for="linkedin" class="col-sm-3 control-label">Linkedin Profile Url</label>
-					      <div class="col-sm-7"><input type="text" name="linkedin" id="city" placeholder="City" value="{userDetails.linkedin}" autofocus="" class="form-control"></div>
+					      <label for="linkedinUrl" class="col-sm-3 control-label">Linkedin Profile Url</label>
+					      <div class="col-sm-7"><input type="text" name="linkedinUrl" id="linkedinUrl" placeholder="linkedin profile public url" value="{userDetails.linkedinUrl}" autofocus="" class="form-control"></div>
 					   </div>
 					   <div class="form-group">
 					      <div class="col-sm-4"><button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Update my profile</button></div>
